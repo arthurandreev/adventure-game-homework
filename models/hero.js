@@ -24,16 +24,26 @@ Hero.prototype.eat = function(food){
 return healthCount;
 };
 
-Hero.prototype.sortTasksByDifficulty = function(){
-  this.tasks.sort(function (task1, task2){
+Hero.prototype.sortTasks = function(criteria){
+  this.tasks.sort((task1, task2) => {
      if (task1.difficultyLevel > task2.difficultyLevel) {
        return -1;
      }
      if (task1.difficultyLevel < task2.difficultyLevel) {
        return 1;
      }
-     return 0;
-   });
- };
+     else {
+       return 0;
+   }
+ });
+}
+
+Hero.prototype.getCompleteTasks = function () {
+  return this.tasks.filter(task => task.completionStatus === true);
+};
+
+Hero.prototype.getIncompleteTasks = function () {
+  return this.tasks.filter(task => task.completionStatus === false);
+};
 
 module.exports = Hero;

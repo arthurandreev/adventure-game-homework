@@ -51,12 +51,40 @@ describe('Hero', function () {
     assert.strictEqual(hero.eat(caviar), actual);
   });
 
-  //below test is not working
-  xit('should be able to sort tasks by difficulty level', function() {
-    const task1 = hero.canAddTask(makeAFire);
-    const task2 = hero.canAddTask(killAllRats);
-    const result = hero.sortTasksByDifficulty();
-    assert.deepStrictEqual(result, [killAllRats, makeAFire]);
+
+  it('should be able to sort tasks by difficulty level', function() {
+    hero.canAddTask(makeAFire);
+    hero.canAddTask(killAllRats);
+    hero.sortTasks('difficultyLevel')
+    const result = [killAllRats, makeAFire];
+    assert.deepStrictEqual(hero.tasks, result);
   });
+
+  it('should be able to sort tasks by urgency level', function() {
+    hero.canAddTask(haveABath);
+    hero.canAddTask(killAllRats);
+    hero.sortTasks('urgencyLevel')
+    const result = [killAllRats, haveABath];
+    assert.deepStrictEqual(hero.tasks, result);
+  });
+
+  it('should be able to get all completed tasks', function() {
+   hero.canAddTask(makeAFire);
+   hero.canAddTask(haveABath);
+   hero.canAddTask(killAllRats);
+   haveABath.markAsCompleted();
+   const result = [haveABath];
+   assert.deepStrictEqual(hero.getCompleteTasks(), result);
+ });
+
+ it('should be able to get all incomplete tasks', function() {
+  hero.canAddTask(makeAFire);
+  hero.canAddTask(haveABath);
+  hero.canAddTask(killAllRats);
+  haveABath.markAsCompleted();
+  const result = [makeAFire, killAllRats];
+  assert.deepStrictEqual(hero.getIncompleteTasks(), result);
+});
+
 
 });
