@@ -1,13 +1,17 @@
-const Hero = function(name, health, favouriteFood, food, tasks) {
+const Hero = function(name, health, favouriteFood, food) {
   this.name = name;
   this.health = health;
   this.favouriteFood = favouriteFood;
   this.food = food;
-  this.tasks = tasks;
+  this.tasks = [];
 };
 
 Hero.prototype.talk = function(){
   return `My name is ${this.name}`;
+};
+
+Hero.prototype.canAddTask = function(task){
+  return this.tasks.push(task);
 };
 
 Hero.prototype.eat = function(food){
@@ -20,12 +24,16 @@ Hero.prototype.eat = function(food){
 return healthCount;
 };
 
-Hero.prototype.sortTasksByCriteria = function(criteria){
-  let unsortedArray = this.tasks;
-  let sortedArray = unsortedArray.sort(function(task1, task2){
-    task1.criteria - task2.criteria;
-  });
-    return sortedArray;
-  };
+Hero.prototype.sortTasksByDifficulty = function(){
+  this.tasks.sort(function (task1, task2){
+     if (task1.difficultyLevel > task2.difficultyLevel) {
+       return -1;
+     }
+     if (task1.difficultyLevel < task2.difficultyLevel) {
+       return 1;
+     }
+     return 0;
+   });
+ };
 
 module.exports = Hero;

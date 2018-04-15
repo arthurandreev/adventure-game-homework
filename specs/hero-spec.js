@@ -13,7 +13,7 @@ describe('Hero', function () {
   let tasksToDo;
 
   beforeEach(function() {
-    hero = new Hero('Spiderman', 15, 'caviar', spinach, tasksToDo);
+    hero = new Hero('Spiderman', 15, 'caviar', spinach);
     spinach = new Food('Spinach', 50);
     caviar = new Food('caviar', 10);
     makeAFire = new Task(5, 10, 'hot dinner', false);
@@ -39,8 +39,11 @@ describe('Hero', function () {
     assert.strictEqual(hero.talk(), 'My name is Spiderman');
   });
 
-  it('should have a collection of tasks to complete', function(){
-    assert.deepEqual(hero.tasks, tasksToDo);
+  it('it should have a collection of tasks to complete', function(){
+    const task1 = hero.canAddTask(makeAFire);
+    const task2 = hero.canAddTask(killAllRats);
+    const result = hero.tasks.length;
+    assert.deepStrictEqual(result, 2);
   });
 
   it('should be able to eat food where health goes up by the replenishment value of food, if food is their favourite food then their health should go up by 1.5 * value', function(){
@@ -50,8 +53,10 @@ describe('Hero', function () {
 
   //below test is not working
   xit('should be able to sort tasks by difficulty level', function() {
-    hero.sortTasksByCriteria(task.difficultyLevel);
-    assert.deepStrictEqual([haveABath, makeAFire, killAllRats], hero.tasks);
+    const task1 = hero.canAddTask(makeAFire);
+    const task2 = hero.canAddTask(killAllRats);
+    const result = hero.sortTasksByDifficulty();
+    assert.deepStrictEqual(result, [killAllRats, makeAFire]);
   });
 
 });
