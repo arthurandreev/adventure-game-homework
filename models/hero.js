@@ -38,7 +38,7 @@ Hero.prototype.sortTasks = function(criteria){
  });
 }
 
-Hero.prototype.getCompleteTasks = function () {
+Hero.prototype.getCompletedTasks = function () {
   return this.tasks.filter(task => task.completionStatus === true);
 };
 

@@ -74,7 +74,7 @@ describe('Hero', function () {
    hero.canAddTask(killAllRats);
    haveABath.markAsCompleted();
    const result = [haveABath];
-   assert.deepStrictEqual(hero.getCompleteTasks(), result);
+   assert.deepStrictEqual(hero.getCompletedTasks(), result);
  });
 
  it('should be able to get all incomplete tasks', function() {
